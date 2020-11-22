@@ -12,6 +12,5 @@ namespace User_Age_Exception_Handling
             : base() { }
         public FraudException(string message)
             : base() { }
-
     }
 }

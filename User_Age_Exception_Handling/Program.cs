@@ -12,48 +12,34 @@ namespace User_Age_Exception_Handling
         {
             try
             {
-                bool trueAge = false;
-
                 DateTime currentDate = DateTime.Today;
                 Console.WriteLine("Please Eneter Your Age:");
                 int userAge = Convert.ToInt32(Console.ReadLine());
-               if (userAge > 0)
+                if (userAge > 0)
                 {
-               
-                
-                DateTime calculation = currentDate.AddYears(-userAge);
-                string yearBorn = calculation.ToString("yyyy");
-                Console.WriteLine("Based on your input, you were born in the year of: {0}", yearBorn);
-                Console.ReadLine();
-            }
-
-
-            catch (FraudException)
-
-            { if (userAge < 0)
-
-                {
-                    Console.WriteLine("Security Alert! Fraudulent Activity Suspected or Detected! Program Execution Aborted!");
+                    DateTime calculation = currentDate.AddYears(-userAge);
+                    string yearBorn = calculation.ToString("yyyy");
+                    Console.WriteLine("Based on your input, you were born in the year of: {0}", yearBorn);
                     Console.ReadLine();
-                    return;
+                }
+                else if (userAge <= 0)
+                {
+                    throw new FraudException();
                 }
             }
-            catch (ArgumentException)
+            catch (FraudException)
+
             {
-                Console.WriteLine("Please use digits only , no decimals or text.");
-                Console.ReadLine();
-                return;
+                Console.WriteLine("Suspected Fraudulent Activity Detected. User Input Is Unacceptable.");
 
             }
             catch (Exception)
             {
                 Console.WriteLine("An error has been detected. Please contact the System Administrator.");
-                Console.ReadLine();
-                return;
-            }
-        
 
+            }
+            Console.ReadLine();
+        }
             
         }
     }
-}
